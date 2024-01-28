@@ -1,6 +1,11 @@
 import streamlit as st
 import pickle
 
+st.set_page_config(
+    page_title="Spam Predictor",
+    page_icon="🔎"
+)
+
 loaded_model = pickle.load(open('model.pkl', 'rb'))
 loaded_vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
