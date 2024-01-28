@@ -21,7 +21,6 @@ def predict(title):
         st.write("Please enter the comment to check if it is a spam message or not...")
 
 st.title("Comment Spam Detector")
-st.divider()
 
 with st.form("comment_form"):
     title = st.text_input('Enter your comment', placeholder="Please enter your comment here...")
