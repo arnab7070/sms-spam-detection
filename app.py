@@ -10,18 +10,22 @@ loaded_model = pickle.load(open('model.pkl', 'rb'))
 loaded_vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
 def predict(title): 
-    new_comment = loaded_vectorizer.transform([title])
-    prediction = loaded_model.predict(new_comment)
-    if title: 
+    if title:
+        new_comment = loaded_vectorizer.transform([title])
+        prediction = loaded_model.predict(new_comment)
         if prediction[0] == 'spam':
-            st.subheader("This comment is :red[spam].")
+            st.subheader("Predicted Result: :red[Spam]")
         else:
-            st.subheader("This comment is :green[not spam].")
+            st.subheader("Predicted Result: :green[Not spam]")
     else:
         st.write("Please enter the comment to check if it is a spam message or not...")
 
 st.title("Comment Spam Detection")
 st.divider()
-title = st.text_input('Enter your message')
-if title: predict(title=title)
-if st.button("Predict"): predict(title=title)
+
+with st.form("comment_form"):
+    title = st.text_input('Enter your message')
+    predict_button = st.form_submit_button("Predict")
+
+if predict_button:
+    predict(title=title)
