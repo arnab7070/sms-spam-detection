@@ -9,8 +9,8 @@ st.set_page_config(
 loaded_model = pickle.load(open('model.pkl', 'rb'))
 loaded_vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
-def predict(new_comment): 
-
+def predict(title): 
+    new_comment = loaded_vectorizer.transform([title])
     prediction = loaded_model.predict(new_comment)
     if title: 
         if prediction[0] == 'spam':
@@ -23,5 +23,5 @@ def predict(new_comment):
 st.title("Comment Spam Detection")
 st.divider()
 title = st.text_input('Enter your message')
-new_comment = loaded_vectorizer.transform([title])
-if st.button("Predict"): predict(new_comment=new_comment)
+if title: predict(title=title)
+if st.button("Predict"): predict(title=title)
