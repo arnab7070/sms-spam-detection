@@ -13,7 +13,7 @@ def predict(title):
     if title:
         new_comment = loaded_vectorizer.transform([title])
         prediction = loaded_model.predict(new_comment)
-        if prediction[0] == 'spam':
+        if prediction[0] == 1:
             st.subheader("Predicted Result: :red[Spam]")
         else:
             st.subheader("Predicted Result: :green[Not spam]")
